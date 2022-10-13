@@ -32,14 +32,21 @@ exports.index = (req, res) => {
       })
     }
   )
-
-  // res.send('NOT IMPLEMENTED: Site Home Page')
-  // res.render('index', { title: 'Local Library' })
 }
 
 // Display list of all books.
 exports.book_list = (req, res) => {
-  res.send('NOT IMPLEMENTED: Book list')
+  Book.find({}, 'title author')
+    // {title: 1} is shorthand for {title: true}
+    .sort({ title: 1 })
+    .populate('author')
+    .exec(function (err, list_books) {
+      if (err) {
+        return next(err)
+      }
+      //Successful, so render
+      res.render('book_list', { title: 'Book List', book_list: list_books })
+    })
 }
 
 // Display detail page for a specific book.
