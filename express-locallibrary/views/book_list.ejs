@@ -11,7 +11,8 @@
     <!-- LOOP thru each book -->
     <% book_list.forEach(book => { %>
       <li>
-        <a href="<%= book.url %>"><%= book.title %> | <%= book.author.name %> </a>
+        <a href="<%= book.url %>"><%= book.title %> </a>
+        (<%= book.author.name %>)
       </li>
       <% }) %>
       <% } else { %>
