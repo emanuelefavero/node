@@ -29,7 +29,7 @@ exports.genre_list = (req, res, next) => {
 // Display detail page for a specific Genre.
 exports.genre_detail = (req, res, next) => {
   const id = mongoose.Types.ObjectId(req.params.id)
-  console.log(id)
+  // console.log(id)
 
   async.parallel(
     {

@@ -13,9 +13,11 @@ const catalogRouter = require('./routes/catalog')
 
 const app = express()
 
+// TIP: Set up NODE_ENV to 'development' to see debug messages, and to 'production' to hide them in production
+
 // Set up mongoose connection
 const mongoose = require('mongoose')
-const mongoDB = `mongodb+srv://admin:2121@cluster0.ywijxob.mongodb.net/local_library?retryWrites=true&w=majority`
+const mongoDB = process.env.MONGODB_URI
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
