@@ -25,17 +25,17 @@
       a.family_name.toUpperCase() %> <% let textB = b.family_name.toUpperCase()
       %> <% return (textA < textB) ? -1 : (textA > textB) ? 1 : 0 %> <% }) %>
 
-      <% authors.forEach(author => { %>
-        <% if (book) { %>
-          <option value="<%= author._id %>" selected="<%= (author._id.toString() === book.author._id.toString() ? 'selected' : false) %>">
-            <%= author.name %> 
-          </option>
-        <% } else { %>
-          <option value="<%= author._id %>">
-            <%= author.name %> 
-          </option>
-        <% } %> 
-      <% }) %>
+      <!-- TODO: Check: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/forms/Update_Book_form -->
+      <% authors.forEach(author => { %> <% if (book) { %>
+      <option
+        value="<%= author._id %>"
+        selected="<%= ((author._id.toString() === book.author._id || author._id.toString()==book.author)  ? 'selected' : false) %>"
+      >
+        <%= author.name %>
+      </option>
+      <% } else { %>
+      <option value="<%= author._id %>"><%= author.name %></option>
+      <% } %> <% }) %>
     </select>
   </div>
 
@@ -45,15 +45,19 @@
       id="summary"
       class="form-control"
       type="textarea"
-      placeholder='Summary'
-      name='summary'
-      required='true'
-    ><%= undefined === book ? '' : book.summary %></textarea>
+      placeholder="Summary"
+      name="summary"
+      required="true"
+    >
+<%= undefined === book ? '' : book.summary %></textarea
+    >
   </div>
 
   <div class="form-group">
     <label for="isbn">ISBN: </label>
-    <input id="isbn" class="form-control" type="text" placeholder='ISBN' name='isbn' required='true' value='<%= undefined === book ? '' : book.isbn %>'>
+    <input id="isbn" class="form-control" type="text" placeholder='ISBN'
+    name='isbn' required='true' value='<%= undefined === book ? '' : book.isbn
+    %>'>
   </div>
 
   <div class="form-group">
@@ -66,20 +70,19 @@
       name="genre"
       required="true"
     >
-      <% genres.forEach(genre => { %>
-        <% if (book) { %>
-          <option value="<%= genre._id %>" selected="<%= (genre._id.toString() === book.genre._id.toString() ? 'selected' : false) %>">
-            <%= genre.name %> 
-          </option>
-        <% } else { %>
-          <option value="<%= genre._id %>">
-            <%= genre.name %> 
-          </option>
-        <% } %> 
-      <% }) %>
+      <% genres.forEach(genre => { %> <% if (book) { %>
+      <option
+        value="<%= genre._id %>"
+        selected="<%= (genre._id.toString() === book.genre._id.toString() ? 'selected' : false) %>"
+      >
+        <%= genre.name %>
+      </option>
+      <% } else { %>
+      <option value="<%= genre._id %>"><%= genre.name %></option>
+      <% } %> <% }) %>
     </select>
   </div>
-  
+
   <button class="btn btn-primary" type="submit">Submit</button>
   <% if (errors) { %>
   <ul>

@@ -183,6 +183,8 @@ exports.author_delete_post = (req, res, next) => {
   )
 }
 
+// TODO: Implement the update get and post pages, check: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/forms
+// Check the end of the mdn webpage
 // Display Author update form on GET
 exports.author_update_get = (req, res) => {
   res.send('NOT IMPLEMENTED: Author update GET')
