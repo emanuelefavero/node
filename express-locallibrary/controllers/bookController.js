@@ -3,6 +3,7 @@ const Book = require('../models/book')
 const Author = require('../models/author')
 const Genre = require('../models/genre')
 const BookInstance = require('../models/bookinstance')
+const mongoose = require('mongoose')
 
 const async = require('async')
 
@@ -52,16 +53,14 @@ exports.book_list = (req, res, next) => {
 
 // Display detail page for a specific book.
 exports.book_detail = (req, res, next) => {
+  const id = mongoose.Types.ObjectId(req.params.id)
   async.parallel(
     {
       book(callback) {
-        Book.findById(req.params.id)
-          .populate('author')
-          .populate('genre')
-          .exec(callback)
+        Book.findById(id).populate('author').populate('genre').exec(callback)
       },
       book_instance(callback) {
-        BookInstance.find({ book: req.params.id }).exec(callback)
+        BookInstance.find({ book: id }).exec(callback)
       },
     },
     (err, results) => {

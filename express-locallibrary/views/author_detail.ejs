@@ -6,13 +6,10 @@
 <p>
   <%= author.date_of_birth_formatted %> - <%= author.date_of_death_formatted %>
   <span>
-    <% if (author.date_of_birth && author.date_of_death) { %> 
-      (aged <%= author.lifespan %>)
-    <% } else if (author.date_of_birth) { %>
-      (<%= author.lifespan %> years old)
-    <% } else { %>
-      (no lifespan information)
-    <% } %> 
+    <% if (author.date_of_birth && author.date_of_death) { %> (aged <%=
+    author.lifespan %>) <% } else if (author.date_of_birth) { %> (<%=
+    author.lifespan %> years old) <% } else { %> (no lifespan information) <% }
+    %>
   </span>
 </p>
 
@@ -30,6 +27,12 @@
     <% } %>
   </dl>
 </div>
+
+<hr />
+<!-- Delete Control (check author_delete.ejs and author_delete_post ) -->
+<p>
+  <a href="<%= author.url %>/delete">Delete Author</a>
+</p>
 
 <!-- FOOTER -->
 <%- include('./partials/footer.ejs') %>
