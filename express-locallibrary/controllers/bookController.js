@@ -35,7 +35,7 @@ exports.index = (req, res) => {
 }
 
 // Display list of all books.
-exports.book_list = (req, res) => {
+exports.book_list = (req, res, next) => {
   Book.find({}, 'title author')
     // {title: 1} is shorthand for {title: true}
     .sort({ title: 1 })
@@ -50,7 +50,7 @@ exports.book_list = (req, res) => {
 }
 
 // Display detail page for a specific book.
-exports.book_detail = (req, res) => {
+exports.book_detail = (req, res, next) => {
   async.parallel(
     {
       book(callback) {
