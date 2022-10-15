@@ -5,6 +5,15 @@
 <h1>Author: <%= author.name %></h1>
 <p>
   <%= author.date_of_birth_formatted %> - <%= author.date_of_death_formatted %>
+  <span>
+    <% if (author.date_of_birth && author.date_of_death) { %> 
+      (aged <%= author.lifespan %>)
+    <% } else if (author.date_of_birth) { %>
+      (<%= author.lifespan %> years old)
+    <% } else { %>
+      (no lifespan information)
+    <% } %> 
+  </span>
 </p>
 
 <div style="margin-left: 20px; margin-top: 20px">
